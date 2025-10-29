@@ -1,6 +1,4 @@
 # PISTACHIO
-**Proteomics-guided Integration and Spatial Transcriptomics Analysis using Constrained Hierarchical Inference and Optimization**
-
 ---
 
 ##  Overview
@@ -9,9 +7,7 @@
 
 It provides a flexible implementation of several NMF-based optimization strategies (Coordinate Descent, Multiplicative Update, and Negative Binomial NMF), supports spatial masking to constrain cell-type distributions, and outputs interpretable W and H matrices with detailed evaluation metrics.
 
-<p align="center">
-  <img src="Methods.png" width="750" alt="PISTACHIO Methods Overview">
-</p>
+<img width="2513" height="1425" alt="Methods" src="https://github.com/user-attachments/assets/cd81f8a9-aea6-4815-80d1-1db048a76d0b" />
 
 ---
 
@@ -19,12 +15,13 @@ It provides a flexible implementation of several NMF-based optimization strategi
 
 Clone the repository and install locally:
 
-bash
-git clone https://github.com/yourusername/pistachio.git
-cd pistachio
+```bash
+git clone https://github.com/ManchesterBioinference/PISTACHIO.git
+cd PISTACHIO
 pip install .
+```
 
-Or install directly from GitHub
+Or install directly from GitHub.
 
 ## Arguments
 
@@ -43,40 +40,30 @@ Or install directly from GitHub
 | `--outdir` | `str` | No | Output directory where all results and figures will be saved. Created if it doesn't exist. | `results/` |
 
 
-## 📁 Output Files
+## Output Files
 
 All results are automatically saved in the directory specified by `--outdir` (default: `results/`).  
-If the directory does not exist, **PISTACHIO** will create it.
+If the directory does not exist, PISTACHIO will create it.
 
 | File Name | Format | Description |
 |------------|:-------:|-------------|
-| `W_output.csv` | CSV | Spot × Component matrix representing the **cell-type proportions per spatial location**. Rows correspond to spot IDs, columns correspond to inferred components or cell types. |
-| `H_output.csv` | CSV | Component × Gene matrix containing the **gene weights or expression signatures** for each inferred component. Rows correspond to components, columns to genes. |
-| `Reconstruction_error.png` | PNG | Line plot showing **reconstruction loss or error** versus iteration number, indicating convergence behavior. |
-| `Y.png` | PNG | Scatter plot comparing **original** vs **reconstructed** data (`Y` vs `Ŷ`), annotated with R² and Pearson correlation metrics. |
+| `W_output.csv` | CSV | Spot × Component matrix representing the cell-type proportions per spatial location. Rows correspond to spot IDs, columns correspond to inferred components or cell types. |
+| `H_output.csv` | CSV | Component × Gene matrix containing the gene weights or expression signatures for each inferred component. Rows correspond to components, columns to genes. |
+| `Reconstruction_error.png` | PNG | Line plot showing reconstruction loss or error versus iteration number, indicating convergence behavior. |
+| `Y.png` | PNG | Scatter plot comparing original vs reconstructed data (`Y` vs `Ŷ`), annotated with R² and Pearson correlation metrics. |
 
 
 ---
 
-**Example directory structure after a run:**
-
-```bash
-results_gbm/
-├── W_output.csv
-├── H_output.csv
-├── Reconstruction_error.png
-├── Y.png
-└── run_summary.txt
-
 ## Example
-
 
 Example files are provided in the examples/ directory.
 
 For realistic testing, you can use spatial transcriptomics (ST) and spatial proteomics (SP) matrices:
-  • glioblastoma_synthetic_ST.csv (gene expression counts)
-  • glioblastoma_synthetic_SP.csv (cell-type distribution mask)
+- glioblastoma_synthetic_ST.csv (gene expression counts)
+- glioblastoma_synthetic_SP.csv (cell-type distribution mask)
 
+```
   pistachio \
   --input glioblastoma_synthetic_ST.csv \
   --mask glioblastoma_synthetic_SP.csv \
@@ -84,3 +71,4 @@ For realistic testing, you can use spatial transcriptomics (ST) and spatial prot
   --method negative_binomial \
   --alpha 20 \
   --outdir results_gbm/
+```
